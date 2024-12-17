@@ -32,11 +32,13 @@ func main() {
 	defer pool.Close()
 
 	userHandlers := handlers.NewUserHandler(pool)
+	proboHandler := handlers.NewProboHandler()
 
 	router := gin.Default()
 	router.Use(RejectTrailingSpaces())
 	router.POST("/signup", userHandlers.Signup)
 	router.POST("/signin", userHandlers.Signin)
+	router.POST("/user/create/:userId", proboHandler.CreateUser)
 	router.Use(authMiddleware())
 	router.Group("/")
 	{
