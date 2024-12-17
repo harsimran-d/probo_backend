@@ -55,3 +55,17 @@ func authMiddleware() gin.HandlerFunc {
 		}
 	}
 }
+
+func RejectTrailingSpaces() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		path := c.Request.URL.Path
+		if strings.HasSuffix(path, " ") || strings.HasSuffix(path, "\t") {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "Invalid request: Trailing spaces are not allowed in the URL.",
+			})
+			c.Abort()
+			return
+		}
+		c.Next()
+	}
+}
