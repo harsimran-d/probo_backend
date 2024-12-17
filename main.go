@@ -34,6 +34,7 @@ func main() {
 	userHandlers := handlers.NewUserHandler(pool)
 
 	router := gin.Default()
+	router.Use(RejectTrailingSpaces())
 	router.POST("/signup", userHandlers.Signup)
 	router.POST("/signin", userHandlers.Signin)
 	router.Use(authMiddleware())
