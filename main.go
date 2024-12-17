@@ -38,7 +38,10 @@ func main() {
 	router.Use(RejectTrailingSpaces())
 	router.POST("/signup", userHandlers.Signup)
 	router.POST("/signin", userHandlers.Signin)
+
 	router.POST("/user/create/:userId", proboHandler.CreateUser)
+	router.POST("/symbol/create/:stockSymbol", proboHandler.CreateSymbol)
+
 	router.Use(authMiddleware())
 	router.Group("/")
 	{

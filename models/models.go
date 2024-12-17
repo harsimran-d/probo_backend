@@ -3,6 +3,7 @@ package models
 import "sync"
 
 type UserID string
+type StockID string
 type MarketID string
 
 type UserBalance struct {
@@ -12,7 +13,7 @@ type UserBalance struct {
 
 type StockBalances struct {
 	Mu       sync.Mutex
-	Balances map[UserID]interface{}
+	Balances map[StockID]interface{}
 }
 
 type Orderbook struct {
