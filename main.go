@@ -40,7 +40,11 @@ func main() {
 	router.POST("/signin", userHandlers.Signin)
 
 	router.POST("/user/create/:userId", proboHandler.CreateUser)
-	router.POST("/symbol/create/:stockSymbol", proboHandler.CreateSymbol)
+	router.POST("/market/create/:marketId", proboHandler.CreateMarket)
+	router.GET("/orderbook/:marketId", proboHandler.GetOrderBook)
+	router.GET("/balances/inr", proboHandler.GetInrBalances)
+	router.GET("/balances/stock", proboHandler.GetStockBalances)
+	router.POST("/reset", proboHandler.Reset)
 
 	router.Use(authMiddleware())
 	router.Group("/")
